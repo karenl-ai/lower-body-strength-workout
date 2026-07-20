@@ -4,81 +4,129 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lower Body Strength Workout</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --blue: #0071e3;
-    --green: #34c759;
-    --gray-bg: #f5f5f7;
-    --gray-text: #86868b;
-    --dark: #1d1d1f;
+    --cream: #faf6f0;
+    --card: #fffdf9;
+    --border-neutral: #efe9e0;
+    --border-rose: #e8cdd1;
+    --navy: #3d4654;
+    --muted: #7a8496;
+    --gold: #c2a265;
+    --rose: #b76e79;
+    --shadow: rgba(61, 70, 84, 0.07) 0px 2px 24px 0px;
   }
   * { box-sizing: border-box; }
   body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background-color: var(--gray-bg);
-    color: var(--dark);
+    font-family: "Jost", "Segoe UI", system-ui, sans-serif;
+    background-color: var(--cream);
+    color: var(--navy);
     display: flex;
     justify-content: center;
     align-items: flex-start;
     min-height: 100vh;
     margin: 0;
-    padding: 2rem 1rem;
+    padding: 2.5rem 1rem;
   }
   .container {
-    background: white;
-    padding: 2rem;
-    border-radius: 16px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    background: var(--card);
+    padding: 2.25rem 2rem 2rem;
+    border-radius: 18px;
+    border: 1px solid var(--border-neutral);
+    box-shadow: var(--shadow);
     width: 100%;
     max-width: 420px;
     text-align: center;
   }
+  .eyebrow {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--rose);
+    margin-bottom: 0.4rem;
+  }
   h1 {
-    font-size: 1.3rem;
-    margin: 0 0 0.25rem;
-    color: var(--dark);
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: 1.9rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin: 0 0 0.9rem;
+    color: var(--navy);
+  }
+  .divider {
+    width: 60px;
+    height: 1px;
+    background: var(--gold);
+    margin: 0 auto 1.1rem;
+    position: relative;
+  }
+  .divider::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: -3px;
+    transform: translateX(-50%) rotate(45deg);
+    width: 6px;
+    height: 6px;
+    background: var(--gold);
   }
   .subtitle {
-    font-size: 0.85rem;
-    color: var(--gray-text);
-    margin-bottom: 1rem;
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-bottom: 1.1rem;
+    letter-spacing: 0.02em;
   }
   .progress-bar-track {
-    background: #e8e8ed;
+    background: var(--border-neutral);
     border-radius: 6px;
-    height: 8px;
+    height: 7px;
     width: 100%;
     overflow: hidden;
-    margin-bottom: 1.25rem;
+    margin-bottom: 1.4rem;
   }
   .progress-bar-fill {
-    background: var(--blue);
+    background: var(--rose);
     height: 100%;
     width: 0%;
     transition: width 0.3s ease;
   }
   .status {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: var(--gray-text);
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--gold);
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0.14em;
     margin-bottom: 0.5rem;
   }
-  h2 { margin: 0 0 0.25rem; color: #333; font-size: 1.3rem; }
-  .reps { color: var(--gray-text); font-size: 0.95rem; margin-bottom: 0.5rem; }
+  h2 {
+    font-family: "Cormorant Garamond", Georgia, serif;
+    margin: 0 0 0.2rem;
+    color: var(--navy);
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+  .reps {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+  }
   .ring-wrap {
     position: relative;
-    width: 220px;
-    height: 220px;
+    width: 210px;
+    height: 210px;
     margin: 1rem auto;
   }
   .ring-wrap svg { transform: rotate(-90deg); }
-  .ring-bg { fill: none; stroke: #e8e8ed; stroke-width: 10; }
+  .ring-bg { fill: none; stroke: var(--border-neutral); stroke-width: 9; }
   .ring-progress {
     fill: none;
-    stroke: var(--blue);
-    stroke-width: 10;
+    stroke: var(--rose);
+    stroke-width: 9;
     stroke-linecap: round;
     transition: stroke-dashoffset 1s linear, stroke 0.3s ease;
   }
@@ -86,77 +134,83 @@
     position: absolute;
     top: 50%; left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 2.8rem;
-    font-weight: bold;
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: 2.6rem;
+    font-weight: 600;
     font-variant-numeric: tabular-nums;
-    color: var(--dark);
+    color: var(--navy);
   }
   .controls { margin-top: 0.5rem; }
   .btn {
-    background-color: var(--blue);
-    color: white;
-    border: none;
-    padding: 0.8rem 2rem;
-    font-size: 1rem;
-    border-radius: 8px;
-    cursor: pointer;
+    background-color: transparent;
+    color: var(--rose);
+    border: 1px solid var(--border-rose);
+    padding: 0.7rem 1.8rem;
+    font-family: "Jost", sans-serif;
+    font-size: 0.78rem;
     font-weight: 500;
-    transition: background-color 0.2s;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
   }
-  .btn:hover { background-color: #0077ed; }
+  .btn:hover { background-color: var(--rose); color: var(--card); }
   .btn-secondary {
-    background-color: #e8e8ed;
-    color: var(--dark);
+    color: var(--muted);
+    border: 1px solid var(--border-neutral);
     margin-left: 0.5rem;
   }
-  .btn-secondary:hover { background-color: #d2d2d7; }
+  .btn-secondary:hover { background-color: var(--muted); color: var(--card); border-color: var(--muted); }
   .btn-row { display: flex; justify-content: center; gap: 0.5rem; margin-top: 0.5rem; flex-wrap: wrap; }
   .exercise-list {
     text-align: left;
-    margin-top: 1.75rem;
-    border-top: 1px solid #e8e8ed;
-    padding-top: 1rem;
+    margin-top: 1.9rem;
+    border-top: 1px solid var(--border-neutral);
+    padding-top: 1.1rem;
   }
   .exercise-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.6rem 0.5rem;
-    font-size: 0.95rem;
-    color: #515154;
-    border-radius: 8px;
+    padding: 0.65rem 0.6rem;
+    font-size: 0.92rem;
+    color: var(--navy);
+    border-radius: 10px;
   }
-  .exercise-item.done { color: var(--gray-text); text-decoration: line-through; }
+  .exercise-item.done { color: var(--muted); text-decoration: line-through; }
   .exercise-item.active-ex {
-    font-weight: bold;
-    color: var(--blue);
-    background: #f0f7ff;
+    font-weight: 600;
+    color: var(--rose);
+    background: #fbf1f1;
   }
   .check {
-    width: 20px; height: 20px;
+    width: 18px; height: 18px;
     border-radius: 50%;
-    border: 2px solid #d2d2d7;
+    border: 1px solid var(--border-rose);
     display: inline-block;
     flex-shrink: 0;
   }
   .exercise-item.done .check {
-    background: var(--green);
-    border-color: var(--green);
+    background: var(--gold);
+    border-color: var(--gold);
   }
   .settings-toggle {
-    margin-top: 1.5rem;
-    font-size: 0.85rem;
-    color: var(--gray-text);
+    margin-top: 1.6rem;
+    font-size: 0.78rem;
+    color: var(--muted);
     cursor: pointer;
     text-decoration: underline;
     background: none; border: none;
+    font-family: "Jost", sans-serif;
+    letter-spacing: 0.03em;
   }
   .settings-panel {
     display: none;
     text-align: left;
     margin-top: 1rem;
     padding-top: 1rem;
-    border-top: 1px solid #e8e8ed;
+    border-top: 1px solid var(--border-neutral);
   }
   .settings-panel.open { display: block; }
   .settings-row {
@@ -164,39 +218,46 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 0.6rem;
-    font-size: 0.9rem;
+    font-size: 0.88rem;
+    color: var(--navy);
   }
-  .settings-row input {
+  .settings-row input[type="number"] {
     width: 70px;
     padding: 0.3rem 0.5rem;
-    border: 1px solid #d2d2d7;
-    border-radius: 6px;
+    border: 1px solid var(--border-neutral);
+    border-radius: 8px;
     text-align: center;
+    font-family: "Jost", sans-serif;
+    background: var(--cream);
+    color: var(--navy);
   }
   .footer-note {
-    margin-top: 1.5rem;
-    font-size: 0.75rem;
-    color: #c7c7cc;
+    margin-top: 1.6rem;
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.02em;
   }
 </style>
 </head>
 <body>
 <div class="container">
-  <h1>Lower Body Strength Workout</h1>
-  <div class="subtitle" id="round-label">Round 1 of 4</div>
+  <div class="eyebrow">Weekly Training Ritual</div>
+  <h1>Lower Body Strength</h1>
+  <div class="divider"></div>
+  <div class="subtitle" id="round-label">Exercise 1 of 4</div>
 
   <div class="progress-bar-track">
     <div class="progress-bar-fill" id="progress-bar"></div>
   </div>
 
-  <div class="status" id="status-text">Set 1 of 3: Work</div>
+  <div class="status" id="status-text">Set 1 of 3 &middot; Work</div>
   <h2 id="exercise-title">1. Goblet Squats</h2>
   <div class="reps" id="exercise-reps">12 reps</div>
 
   <div class="ring-wrap">
-    <svg width="220" height="220">
-      <circle class="ring-bg" cx="110" cy="110" r="100"></circle>
-      <circle class="ring-progress" id="ring" cx="110" cy="110" r="100"></circle>
+    <svg width="210" height="210">
+      <circle class="ring-bg" cx="105" cy="105" r="96"></circle>
+      <circle class="ring-progress" id="ring" cx="105" cy="105" r="96"></circle>
     </svg>
     <div class="timer-display" id="time-display">00:45</div>
   </div>
@@ -209,7 +270,7 @@
 
   <div class="exercise-list" id="exercise-list"></div>
 
-  <button class="settings-toggle" onclick="toggleSettings()">⚙ Edit workout settings</button>
+  <button class="settings-toggle" onclick="toggleSettings()">Edit workout settings</button>
   <div class="settings-panel" id="settings-panel">
     <div class="settings-row"><span>Work time (sec)</span><input type="number" id="work-input" min="5" step="5"></div>
     <div class="settings-row"><span>Rest time (sec)</span><input type="number" id="rest-input" min="5" step="5"></div>
@@ -220,7 +281,7 @@
     <div class="btn-row"><button class="btn" onclick="applySettings()">Apply &amp; Reset</button></div>
   </div>
 
-  <div class="footer-note">Tap Start to begin. Your progress resets each time you refresh.</div>
+  <div class="footer-note">Tap Start to begin &middot; progress resets on refresh</div>
 </div>
 
 <script>
@@ -244,7 +305,7 @@
   let timerInterval = null;
   let isRunning = false;
 
-  const RING_CIRCUMFERENCE = 2 * Math.PI * 100;
+  const RING_CIRCUMFERENCE = 2 * Math.PI * 96;
 
   function renderExerciseList() {
     const list = document.getElementById('exercise-list');
@@ -279,13 +340,13 @@
     ring.style.strokeDashoffset = RING_CIRCUMFERENCE * (1 - fraction);
 
     if (isWorking) {
-      statusEl.innerText = `Set ${currentSet} of ${TOTAL_SETS}: Work`;
-      statusEl.style.color = "var(--blue)";
-      ring.style.stroke = "var(--blue)";
+      statusEl.innerText = `Set ${currentSet} of ${TOTAL_SETS} · Work`;
+      statusEl.style.color = "var(--rose)";
+      ring.style.stroke = "#b76e79";
     } else {
-      statusEl.innerText = `Set ${currentSet} of ${TOTAL_SETS}: Rest`;
-      statusEl.style.color = "var(--green)";
-      ring.style.stroke = "var(--green)";
+      statusEl.innerText = `Set ${currentSet} of ${TOTAL_SETS} · Rest`;
+      statusEl.style.color = "var(--gold)";
+      ring.style.stroke = "#c2a265";
     }
 
     // overall progress bar across whole workout

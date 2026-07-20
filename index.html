@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lower Body Strength Workout</title>
+<style>
+  :root {
+    --blue: #0071e3;
+    --green: #34c759;
+    --gray-bg: #f5f5f7;
+    --gray-text: #86868b;
+    --dark: #1d1d1f;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--gray-bg);
+    color: var(--dark);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    margin: 0;
+    padding: 2rem 1rem;
+  }
+  .container {
+    background: white;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+  }
+  h1 {
+    font-size: 1.3rem;
+    margin: 0 0 0.25rem;
+    color: var(--dark);
+  }
+  .subtitle {
+    font-size: 0.85rem;
+    color: var(--gray-text);
+    margin-bottom: 1rem;
+  }
+  .progress-bar-track {
+    background: #e8e8ed;
+    border-radius: 6px;
+    height: 8px;
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 1.25rem;
+  }
+  .progress-bar-fill {
+    background: var(--blue);
+    height: 100%;
+    width: 0%;
+    transition: width 0.3s ease;
+  }
+  .status {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--gray-text);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+  }
+  h2 { margin: 0 0 0.25rem; color: #333; font-size: 1.3rem; }
+  .reps { color: var(--gray-text); font-size: 0.95rem; margin-bottom: 0.5rem; }
+  .ring-wrap {
+    position: relative;
+    width: 220px;
+    height: 220px;
+    margin: 1rem auto;
+  }
+  .ring-wrap svg { transform: rotate(-90deg); }
+  .ring-bg { fill: none; stroke: #e8e8ed; stroke-width: 10; }
+  .ring-progress {
+    fill: none;
+    stroke: var(--blue);
+    stroke-width: 10;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 1s linear, stroke 0.3s ease;
+  }
+  .timer-display {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2.8rem;
+    font-weight: bold;
+    font-variant-numeric: tabular-nums;
+    color: var(--dark);
+  }
+  .controls { margin-top: 0.5rem; }
+  .btn {
+    background-color: var(--blue);
+    color: white;
+    border: none;
+    padding: 0.8rem 2rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s;
+  }
+  .btn:hover { background-color: #0077ed; }
+  .btn-secondary {
+    background-color: #e8e8ed;
+    color: var(--dark);
+    margin-left: 0.5rem;
+  }
+  .btn-secondary:hover { background-color: #d2d2d7; }
+  .btn-row { display: flex; justify-content: center; gap: 0.5rem; margin-top: 0.5rem; flex-wrap: wrap; }
+  .exercise-list {
+    text-align: left;
+    margin-top: 1.75rem;
+    border-top: 1px solid #e8e8ed;
+    padding-top: 1rem;
+  }
+  .exercise-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.6rem 0.5rem;
+    font-size: 0.95rem;
+    color: #515154;
+    border-radius: 8px;
+  }
+  .exercise-item.done { color: var(--gray-text); text-decoration: line-through; }
+  .exercise-item.active-ex {
+    font-weight: bold;
+    color: var(--blue);
+    background: #f0f7ff;
+  }
+  .check {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    border: 2px solid #d2d2d7;
+    display: inline-block;
+    flex-shrink: 0;
+  }
+  .exercise-item.done .check {
+    background: var(--green);
+    border-color: var(--green);
+  }
+  .settings-toggle {
+    margin-top: 1.5rem;
+    font-size: 0.85rem;
+    color: var(--gray-text);
+    cursor: pointer;
+    text-decoration: underline;
+    background: none; border: none;
+  }
+  .settings-panel {
+    display: none;
+    text-align: left;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e8e8ed;
+  }
+  .settings-panel.open { display: block; }
+  .settings-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.6rem;
+    font-size: 0.9rem;
+  }
+  .settings-row input {
+    width: 70px;
+    padding: 0.3rem 0.5rem;
+    border: 1px solid #d2d2d7;
+    border-radius: 6px;
+    text-align: center;
+  }
+  .footer-note {
+    margin-top: 1.5rem;
+    font-size: 0.75rem;
+    color: #c7c7cc;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Lower Body Strength Workout</h1>
+  <div class="subtitle" id="round-label">Round 1 of 4</div>
+
+  <div class="progress-bar-track">
+    <div class="progress-bar-fill" id="progress-bar"></div>
+  </div>
+
+  <div class="status" id="status-text">Set 1 of 3: Work</div>
+  <h2 id="exercise-title">1. Goblet Squats</h2>
+  <div class="reps" id="exercise-reps">12 reps</div>
+
+  <div class="ring-wrap">
+    <svg width="220" height="220">
+      <circle class="ring-bg" cx="110" cy="110" r="100"></circle>
+      <circle class="ring-progress" id="ring" cx="110" cy="110" r="100"></circle>
+    </svg>
+    <div class="timer-display" id="time-display">00:45</div>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn" id="start-btn" onclick="toggleTimer()">Start</button>
+    <button class="btn btn-secondary" onclick="skipPhase()">Skip</button>
+    <button class="btn btn-secondary" onclick="resetTimer()">Reset</button>
+  </div>
+
+  <div class="exercise-list" id="exercise-list"></div>
+
+  <button class="settings-toggle" onclick="toggleSettings()">⚙ Edit workout settings</button>
+  <div class="settings-panel" id="settings-panel">
+    <div class="settings-row"><span>Work time (sec)</span><input type="number" id="work-input" min="5" step="5"></div>
+    <div class="settings-row"><span>Rest time (sec)</span><input type="number" id="rest-input" min="5" step="5"></div>
+    <div class="settings-row"><span>Sets per exercise</span><input type="number" id="sets-input" min="1" step="1"></div>
+    <div class="settings-row"><span>Sound alerts</span>
+      <input type="checkbox" id="sound-input" checked>
+    </div>
+    <div class="btn-row"><button class="btn" onclick="applySettings()">Apply &amp; Reset</button></div>
+  </div>
+
+  <div class="footer-note">Tap Start to begin. Your progress resets each time you refresh.</div>
+</div>
+
+<script>
+  // ---- Config (mutable via settings panel) ----
+  let WORK_TIME = 45;
+  let REST_TIME = 45;
+  let TOTAL_SETS = 3;
+  let SOUND_ON = true;
+
+  const exercises = [
+    { name: "1. Goblet Squats", reps: "12 reps" },
+    { name: "2. Reverse Lunges", reps: "10 reps/leg" },
+    { name: "3. Glute Bridges", reps: "15 reps, 2s hold" },
+    { name: "4. Clamshells / Band Walks", reps: "15 reps/side" }
+  ];
+
+  let currentExerciseIndex = 0;
+  let currentSet = 1;
+  let isWorking = true;
+  let timeLeft = WORK_TIME;
+  let timerInterval = null;
+  let isRunning = false;
+
+  const RING_CIRCUMFERENCE = 2 * Math.PI * 100;
+
+  function renderExerciseList() {
+    const list = document.getElementById('exercise-list');
+    list.innerHTML = '';
+    exercises.forEach((ex, i) => {
+      const item = document.createElement('div');
+      item.className = 'exercise-item';
+      item.id = `ex-${i}`;
+      if (i < currentExerciseIndex) item.classList.add('done');
+      if (i === currentExerciseIndex) item.classList.add('active-ex');
+      item.innerHTML = `<span>${ex.name} (${ex.reps})</span><span class="check"></span>`;
+      list.appendChild(item);
+    });
+  }
+
+  function updateDOM() {
+    const minutes = Math.floor(timeLeft / 60).toString().padStart(2, '0');
+    const seconds = (timeLeft % 60).toString().padStart(2, '0');
+    document.getElementById('time-display').innerText = `${minutes}:${seconds}`;
+
+    const ex = exercises[currentExerciseIndex];
+    document.getElementById('exercise-title').innerText = ex.name;
+    document.getElementById('exercise-reps').innerText = ex.reps;
+    document.getElementById('round-label').innerText =
+      `Exercise ${currentExerciseIndex + 1} of ${exercises.length}`;
+
+    const statusEl = document.getElementById('status-text');
+    const ring = document.getElementById('ring');
+    const total = isWorking ? WORK_TIME : REST_TIME;
+    const fraction = total > 0 ? timeLeft / total : 0;
+    ring.style.strokeDasharray = RING_CIRCUMFERENCE;
+    ring.style.strokeDashoffset = RING_CIRCUMFERENCE * (1 - fraction);
+
+    if (isWorking) {
+      statusEl.innerText = `Set ${currentSet} of ${TOTAL_SETS}: Work`;
+      statusEl.style.color = "var(--blue)";
+      ring.style.stroke = "var(--blue)";
+    } else {
+      statusEl.innerText = `Set ${currentSet} of ${TOTAL_SETS}: Rest`;
+      statusEl.style.color = "var(--green)";
+      ring.style.stroke = "var(--green)";
+    }
+
+    // overall progress bar across whole workout
+    const totalPhases = exercises.length * TOTAL_SETS * 2;
+    const phasesDone = currentExerciseIndex * TOTAL_SETS * 2 +
+      (currentSet - 1) * 2 + (isWorking ? 0 : 1);
+    const pct = Math.min(100, (phasesDone / totalPhases) * 100);
+    document.getElementById('progress-bar').style.width = pct + '%';
+
+    for (let i = 0; i < exercises.length; i++) {
+      const item = document.getElementById(`ex-${i}`);
+      item.classList.remove('active-ex', 'done');
+      if (i < currentExerciseIndex) item.classList.add('done');
+      if (i === currentExerciseIndex) item.classList.add('active-ex');
+    }
+  }
+
+  function beep() {
+    if (!SOUND_ON) return;
+    try {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.frequency.value = 880;
+      gain.gain.setValueAtTime(0.15, ctx.currentTime);
+      osc.start();
+      osc.stop(ctx.currentTime + 0.15);
+    } catch (e) { /* audio not available */ }
+    if (navigator.vibrate) navigator.vibrate(150);
+  }
+
+  function toggleTimer() {
+    if (isRunning) {
+      clearInterval(timerInterval);
+      document.getElementById('start-btn').innerText = 'Start';
+      isRunning = false;
+    } else {
+      document.getElementById('start-btn').innerText = 'Pause';
+      isRunning = true;
+      timerInterval = setInterval(() => {
+        timeLeft--;
+        if (timeLeft < 0) {
+          handlePhaseChange();
+        }
+        updateDOM();
+      }, 1000);
+    }
+  }
+
+  function skipPhase() {
+    handlePhaseChange();
+    updateDOM();
+  }
+
+  function handlePhaseChange() {
+    beep();
+    if (isWorking) {
+      isWorking = false;
+      timeLeft = REST_TIME;
+    } else {
+      isWorking = true;
+      timeLeft = WORK_TIME;
+      currentSet++;
+
+      if (currentSet > TOTAL_SETS) {
+        currentSet = 1;
+        currentExerciseIndex++;
+        if (currentExerciseIndex >= exercises.length) {
+          clearInterval(timerInterval);
+          isRunning = false;
+          document.getElementById('start-btn').innerText = 'Start';
+          currentExerciseIndex = exercises.length - 1;
+          updateDOM();
+          document.getElementById('progress-bar').style.width = '100%';
+          setTimeout(() => alert("Workout complete! Great job! 💪"), 100);
+          resetTimer();
+          return;
+        }
+      }
+    }
+  }
+
+  function resetTimer() {
+    clearInterval(timerInterval);
+    isRunning = false;
+    currentExerciseIndex = 0;
+    currentSet = 1;
+    isWorking = true;
+    timeLeft = WORK_TIME;
+    document.getElementById('start-btn').innerText = 'Start';
+    renderExerciseList();
+    updateDOM();
+  }
+
+  function toggleSettings() {
+    document.getElementById('settings-panel').classList.toggle('open');
+  }
+
+  function applySettings() {
+    WORK_TIME = parseInt(document.getElementById('work-input').value, 10) || 45;
+    REST_TIME = parseInt(document.getElementById('rest-input').value, 10) || 45;
+    TOTAL_SETS = parseInt(document.getElementById('sets-input').value, 10) || 3;
+    SOUND_ON = document.getElementById('sound-input').checked;
+    resetTimer();
+  }
+
+  // init settings panel values
+  document.getElementById('work-input').value = WORK_TIME;
+  document.getElementById('rest-input').value = REST_TIME;
+  document.getElementById('sets-input').value = TOTAL_SETS;
+  document.getElementById('sound-input').checked = SOUND_ON;
+
+  renderExerciseList();
+  updateDOM();
+</script>
+</body>
+</html>
